@@ -6,23 +6,24 @@
 
 body {
   font-family: "Arial", sans-serif;
-  background: #f9fafb;
+  background: #f3f6fb;
   color: #222;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  padding: 15px;
 }
 
 .container {
   text-align: center;
   width: 100%;
-  max-width: 500px;   /* rộng hơn */
+  max-width: 520px;
   padding: 25px;
 }
 
 .logo {
-  width: 200px;       /* logo to hơn */
+  width: 200px;
   max-width: 70%;
   margin: 25px auto;
   display: block;
@@ -40,14 +41,29 @@ body {
   padding: 12px 16px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  font-size: 16px;    /* chữ to hơn */
+  font-size: 16px;
   flex: 1;
+  background: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.lang-box select:focus {
+  border-color: #4a7efc;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74,126,252,0.2);
 }
 
 .swap {
-  font-size: 26px;
+  font-size: 28px;
   cursor: pointer;
   padding: 0 8px;
+  user-select: none;
+  transition: transform 0.2s;
+}
+
+.swap:hover {
+  transform: rotate(180deg);
 }
 
 .input-box,
@@ -55,9 +71,10 @@ body {
   background: #fff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
   margin-top: 20px;
   text-align: left;
+  transition: 0.3s;
 }
 
 label {
@@ -65,11 +82,12 @@ label {
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
+  color: #333;
 }
 
 textarea {
   width: 100%;
-  min-height: 140px;  /* textarea cao hơn */
+  min-height: 140px;
   border-radius: 10px;
   border: 1px solid #ccc;
   padding: 14px;
@@ -77,6 +95,14 @@ textarea {
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 12px;
+  background: #fafafa;
+  transition: border-color 0.2s;
+}
+
+textarea:focus {
+  border-color: #4a7efc;
+  outline: none;
+  background: #fff;
 }
 
 button {
@@ -88,12 +114,16 @@ button {
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
-  transition: 0.3s;
+  transition: background 0.3s, transform 0.1s;
   width: 100%;
 }
 
 button:hover {
   background: #335cd6;
+}
+
+button:active {
+  transform: scale(0.97);
 }
 
 #copyBtn {
@@ -110,6 +140,10 @@ button:hover {
   color: #666;
   margin-bottom: 12px;
   text-align: right;
+}
+
+.result-box {
+  border-left: 5px solid #4a7efc;
 }
 
 footer {

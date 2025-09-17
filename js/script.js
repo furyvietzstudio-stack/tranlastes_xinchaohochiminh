@@ -12,26 +12,25 @@ const targetLabel = document.getElementById("targetLabel");
 
 const placeholders = {
   vi: "Nhập văn bản cần dịch...",
-  ko: "번역할 텍스트를 입력하세요...",
-  en: "Enter text to translate..."
+  ko: "번역할 텍스트를 입력하세요..."
 };
 
-// Đếm ký tự
+// Đếm ký tự trong ô nhập
 inputText.addEventListener("input", () => {
   count.textContent = inputText.value.length;
 });
 
-// Cập nhật giao diện
+// Cập nhật giao diện theo ngôn ngữ chọn
 function updateUI() {
   langLabel.textContent = langFrom.options[langFrom.selectedIndex].text;
-  inputText.placeholder = placeholders[langFrom.value];
+  inputText.placeholder = placeholders[langFrom.value] || "Nhập văn bản...";
   targetLabel.textContent = langTo.options[langTo.selectedIndex].text;
 }
 
 langFrom.addEventListener("change", updateUI);
 langTo.addEventListener("change", updateUI);
 
-// Swap ⇄
+// Hoán đổi ⇄ ngôn ngữ
 swapBtn.addEventListener("click", () => {
   const temp = langFrom.value;
   langFrom.value = langTo.value;
@@ -39,16 +38,17 @@ swapBtn.addEventListener("click", () => {
   updateUI();
 });
 
-// Gửi dịch
+// Gửi yêu cầu dịch
 sendBtn.addEventListener("click", async () => {
-  if (!inputText.value.trim()) {
+  const text = inputText.value.trim();
+  if (!text) {
     alert("Vui lòng nhập văn bản!");
     return;
   }
 
   const payload = {
-    text: inputText.value,
-    sourceLang: langFrom.value, // dùng value (vi, ko, en)
+    text,
+    sourceLang: langFrom.value, // vi hoặc ko
     targetLang: langTo.value
   };
 
@@ -72,8 +72,8 @@ sendBtn.addEventListener("click", async () => {
 
     resultBox.style.display = "block";
   } catch (err) {
-    console.error(err);
-    translatedText.value = "⚠️ Có lỗi kết nối tới server!";
+    console.error("Client Error:", err);
+    translatedText.value = "⚠️ Không thể kết nối tới server!";
     resultBox.style.display = "block";
   } finally {
     sendBtn.textContent = "Dịch";
@@ -81,12 +81,12 @@ sendBtn.addEventListener("click", async () => {
   }
 });
 
-// Copy kết quả
+// Copy kết quả dịch
 copyBtn.addEventListener("click", () => {
   translatedText.select();
   document.execCommand("copy");
   alert("✅ Đã copy kết quả vào clipboard!");
 });
 
-// Khởi tạo UI
+// Khởi tạo giao diện ban đầu
 updateUI();

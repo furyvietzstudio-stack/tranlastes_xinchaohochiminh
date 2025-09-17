@@ -1,10 +1,13 @@
 {
-  "name": "XinChaoHoChiMinh",
+  "name": "XinChaoHoChiMinh - Translator",
   "short_name": "XCHM",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#4a7efc",
+  "description": "Ứng dụng dịch song ngữ Việt - Hàn nhanh chóng và tiện lợi.",
   "icons": [
     {
       "src": "icon-192.png",
@@ -15,6 +18,12 @@
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
