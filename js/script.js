@@ -25,7 +25,15 @@ function updateUI() {
   langLabel.textContent = langFrom.options[langFrom.selectedIndex].text;
   inputText.placeholder = placeholders[langFrom.value] || "Nhập văn bản...";
   targetLabel.textContent = langTo.options[langTo.selectedIndex].text;
+
+  // 🔥 nút dịch hiển thị theo ngôn ngữ gốc (langFrom)
+  if (langFrom.value === "vi") {
+    sendBtn.textContent = "Dịch";
+  } else if (langFrom.value === "ko") {
+    sendBtn.textContent = "번역";
+  }
 }
+
 
 langFrom.addEventListener("change", updateUI);
 langTo.addEventListener("change", updateUI);
