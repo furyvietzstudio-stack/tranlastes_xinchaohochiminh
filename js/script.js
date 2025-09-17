@@ -33,7 +33,7 @@ langTo.addEventListener("change", updateUI);
 
 // Swap ⇄
 swapBtn.addEventListener("click", () => {
-  let temp = langFrom.value;
+  const temp = langFrom.value;
   langFrom.value = langTo.value;
   langTo.value = temp;
   updateUI();
@@ -48,11 +48,11 @@ sendBtn.addEventListener("click", async () => {
 
   const payload = {
     text: inputText.value,
-    sourceLang: langFrom.options[langFrom.selectedIndex].text,
-    targetLang: langTo.options[langTo.selectedIndex].text
+    sourceLang: langFrom.value, // dùng value (vi, ko, en)
+    targetLang: langTo.value
   };
 
-  sendBtn.textContent = "Đang dịch...";
+  sendBtn.textContent = "⏳ Đang dịch...";
   sendBtn.disabled = true;
 
   try {
@@ -63,15 +63,17 @@ sendBtn.addEventListener("click", async () => {
     });
 
     const data = await res.json();
-    if (data.translated) {
+
+    if (res.ok && data.translated) {
       translatedText.value = data.translated;
-      resultBox.style.display = "block";
     } else {
-      translatedText.value = "❌ Dịch thất bại!";
-      resultBox.style.display = "block";
+      translatedText.value = "❌ Dịch thất bại: " + (data.error || "Không rõ nguyên nhân");
     }
+
+    resultBox.style.display = "block";
   } catch (err) {
-    translatedText.value = "⚠️ Có lỗi xảy ra!";
+    console.error(err);
+    translatedText.value = "⚠️ Có lỗi kết nối tới server!";
     resultBox.style.display = "block";
   } finally {
     sendBtn.textContent = "Dịch";
