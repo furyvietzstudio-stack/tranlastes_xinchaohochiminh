@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         messages: [
           {
             role: "system",
-            content: `You are a translation assistant. Translate the following text from ${sourceLang} to ${targetLang}. Only return the translated text.`
+            content: `Bạn là trợ lý dịch thuật. Hãy dịch chính xác đoạn văn bản từ ${sourceLang} sang ${targetLang}.`
           },
           { role: "user", content: text }
         ],
@@ -25,11 +25,16 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-    const translated = data.choices[0].message.content;
 
+    if (data.error) {
+      console.error("OpenAI API Error:", data.error);
+      return res.status(500).json({ error: data.error.message });
+    }
+
+    const translated = data.choices[0].message.content;
     res.status(200).json({ translated });
   } catch (err) {
-    console.error(err);
+    console.error("Server Error:", err);
     res.status(500).json({ error: "Translation failed" });
   }
 }
