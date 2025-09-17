@@ -4,9 +4,12 @@ const sendBtn = document.getElementById("sendBtn");
 const langFrom = document.getElementById("langFrom");
 const langTo = document.getElementById("langTo");
 const langLabel = document.getElementById("langLabel");
-const swapBtn = document.querySelector(".swap");
+const swapBtn = document.getElementById("swapBtn");
+const resultBox = document.getElementById("resultBox");
+const translatedText = document.getElementById("translatedText");
+const copyBtn = document.getElementById("copyBtn");
+const targetLabel = document.getElementById("targetLabel");
 
-// Placeholder theo ngôn ngữ
 const placeholders = {
   vi: "Nhập văn bản cần dịch...",
   ko: "번역할 텍스트를 입력하세요...",
@@ -18,33 +21,70 @@ inputText.addEventListener("input", () => {
   count.textContent = inputText.value.length;
 });
 
-// Hàm cập nhật label + placeholder
+// Cập nhật giao diện
 function updateUI() {
   langLabel.textContent = langFrom.options[langFrom.selectedIndex].text;
   inputText.placeholder = placeholders[langFrom.value];
+  targetLabel.textContent = langTo.options[langTo.selectedIndex].text;
 }
 
-// Khi đổi ngôn ngữ nguồn
 langFrom.addEventListener("change", updateUI);
+langTo.addEventListener("change", updateUI);
 
-// 👉 Sự kiện bấm nút hoán đổi
+// Swap ⇄
 swapBtn.addEventListener("click", () => {
   let temp = langFrom.value;
   langFrom.value = langTo.value;
   langTo.value = temp;
-
   updateUI();
 });
 
-// Gửi dữ liệu
-sendBtn.addEventListener("click", () => {
+// Gửi dịch
+sendBtn.addEventListener("click", async () => {
   if (!inputText.value.trim()) {
     alert("Vui lòng nhập văn bản!");
     return;
   }
 
-  alert(`Gửi từ [${langFrom.value}] sang [${langTo.value}]:\n${inputText.value}`);
+  const payload = {
+    text: inputText.value,
+    sourceLang: langFrom.options[langFrom.selectedIndex].text,
+    targetLang: langTo.options[langTo.selectedIndex].text
+  };
+
+  sendBtn.textContent = "Đang dịch...";
+  sendBtn.disabled = true;
+
+  try {
+    const res = await fetch("/api/translate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if (data.translated) {
+      translatedText.value = data.translated;
+      resultBox.style.display = "block";
+    } else {
+      translatedText.value = "❌ Dịch thất bại!";
+      resultBox.style.display = "block";
+    }
+  } catch (err) {
+    translatedText.value = "⚠️ Có lỗi xảy ra!";
+    resultBox.style.display = "block";
+  } finally {
+    sendBtn.textContent = "Dịch";
+    sendBtn.disabled = false;
+  }
 });
 
-// Khởi tạo lần đầu
+// Copy kết quả
+copyBtn.addEventListener("click", () => {
+  translatedText.select();
+  document.execCommand("copy");
+  alert("✅ Đã copy kết quả vào clipboard!");
+});
+
+// Khởi tạo UI
 updateUI();
