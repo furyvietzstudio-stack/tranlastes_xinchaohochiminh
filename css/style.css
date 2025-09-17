@@ -1,0 +1,162 @@
+/* Reset cơ bản */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background: #f9fafb;
+  color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container chính */
+.container {
+  text-align: center;
+  width: 100%;
+  max-width: 420px;   /* phù hợp mobile và tablet */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  width: 160px;
+  max-width: 60%;
+  height: auto;
+  margin: 20px auto;
+}
+
+/* Hộp chọn ngôn ngữ */
+.lang-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  gap: 10px;
+}
+
+.lang-box select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  flex: 1;
+  min-width: 100px;
+}
+
+.lang-box .swap {
+  font-size: 18px;
+  color: #444;
+  cursor: pointer;
+}
+
+/* Khung nhập */
+.input-box {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-top: 15px;
+  width: 100%;
+  text-align: left;
+}
+
+.input-box label {
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  resize: none;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.char-count {
+  font-size: 12px;
+  color: #666;
+  margin: 5px 0;
+  text-align: right;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #4a7efc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #335cd6;
+}
+
+/* Footer */
+footer {
+  margin-top: 25px;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}
+
+/* --- Responsive --- */
+
+/* Tablet (600px – 900px) */
+@media (min-width: 600px) {
+  .container {
+    max-width: 600px;
+  }
+  .logo {
+    width: 200px;
+  }
+  textarea {
+    min-height: 150px;
+    font-size: 15px;
+  }
+  button {
+    font-size: 16px;
+  }
+}
+
+/* Desktop (900px trở lên) */
+@media (min-width: 900px) {
+  body {
+    padding: 40px;
+  }
+  .container {
+    max-width: 700px;
+  }
+  .logo {
+    width: 220px;
+  }
+  .lang-box select {
+    font-size: 16px;
+  }
+  textarea {
+    min-height: 180px;
+    font-size: 16px;
+  }
+  button {
+    font-size: 17px;
+  }
+}

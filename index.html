@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XINCHAOHOCHIMINH</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="json/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+</head>
+<body>
+  <div class="container">
+    <img src="picter/logo.png" alt="Logo" class="logo" />
+
+    <div class="lang-box">
+  <select id="langFrom">
+    <option value="vi">Tiếng Việt</option>
+    <option value="ko">한국어</option>
+    <option value="en">English</option>
+  </select>
+
+  <span class="swap">⇄</span>
+
+  <select id="langTo">
+    <option value="ko">한국어</option>
+    <option value="vi">Tiếng Việt</option>
+    <option value="en">English</option>
+  </select>
+</div>
+
+
+    <div class="input-box">
+      <label for="inputText" id="langLabel">Tiếng Việt</label>
+      <textarea id="inputText" maxlength="200" placeholder="번역할 텍스트를 입력하세요..."></textarea>
+      <div class="char-count"><span id="count">0</span>/200 자</div>
+      <button id="sendBtn">전송</button>
+    </div>
+
+    <footer>
+      Copyright 2025 © kkacmn - XINCHAOHOCHIMINH
+    </footer>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
