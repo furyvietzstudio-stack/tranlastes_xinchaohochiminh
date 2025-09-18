@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: "Arial", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: #f3f6fb;
   color: #222;
   display: flex;
@@ -13,6 +13,7 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 15px;
+  
 }
 
 .container {
