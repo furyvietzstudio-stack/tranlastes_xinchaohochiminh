@@ -60,7 +60,7 @@ sendBtn.addEventListener("click", async () => {
     targetLang: langTo.value
   };
 
-  sendBtn.textContent = "⏳ Đang dịch...";
+  sendBtn.textContent = "⏳";
   sendBtn.disabled = true;
 
   try {
