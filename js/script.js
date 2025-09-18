@@ -81,11 +81,15 @@ sendBtn.addEventListener("click", async () => {
     resultBox.style.display = "block";
   } catch (err) {
     console.error("Client Error:", err);
-    translatedText.value = "⚠️ Không thể kết nối tới server!";
+    translatedText.value = "⚠️ Connet server!";
     resultBox.style.display = "block";
   } finally {
-    sendBtn.textContent = "Dịch";
     sendBtn.disabled = false;
+  if (langFrom.value === "vi") {
+    sendBtn.textContent = "Dịch";
+      } else if (langFrom.value === "ko") {
+        sendBtn.textContent = "번역";
+      }
   }
 });
 

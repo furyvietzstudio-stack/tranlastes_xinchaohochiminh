@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (!text || !sourceLang || !targetLang) {
     return res.status(400).json({ error: "Thiếu dữ liệu!" });
   }
-
+  
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
