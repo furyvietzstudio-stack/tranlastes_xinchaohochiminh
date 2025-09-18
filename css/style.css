@@ -16,6 +16,13 @@ body {
   
 }
 
+#translatedText {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
 .container {
   text-align: center;
   width: 100%;
