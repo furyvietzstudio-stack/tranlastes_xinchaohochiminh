@@ -100,5 +100,6 @@ copyBtn.addEventListener("click", () => {
   alert("✅ Đã copy kết quả vào clipboard!");
 });
 
+
 // Khởi tạo giao diện ban đầu
 updateUI();
