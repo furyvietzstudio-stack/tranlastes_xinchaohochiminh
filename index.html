@@ -60,13 +60,19 @@
       </select>
     </div>
 
-    <!-- Khung nhập -->
-    <div class="input-box">
-      <label for="inputText" id="langLabel">Tiếng Việt</label>
-      <textarea id="inputText" maxlength="200" placeholder="Nhập văn bản cần dịch..."></textarea>
-      <div class="char-count"><span id="count">0</span>/200 ký tự</div>
-      <button id="sendBtn">Dịch</button>
-    </div>
+   <!-- Khung nhập -->
+<div class="input-box">
+  <label for="inputText" id="langLabel">Tiếng Việt</label>
+  
+  <div class="input-wrapper">
+    <textarea id="inputText" maxlength="200" placeholder="Nhập văn bản cần dịch..."></textarea>
+    <span id="clearInput" class="clear-input">&times;</span>
+  </div>
+
+  <div class="char-count"><span id="count">0</span>/200 ký tự</div>
+  <button id="sendBtn">Dịch</button>
+</div>
+
 
     <!-- Kết quả dịch -->
     <div id="resultBox" class="result-box" style="display:none;">

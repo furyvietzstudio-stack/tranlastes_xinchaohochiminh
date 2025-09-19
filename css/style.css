@@ -206,3 +206,44 @@ footer {
   margin-right: 8px;
   border-radius: 50%;
 }
+
+
+/* Khung bao textarea */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* textarea */
+textarea {
+  width: 100%;
+  min-height: 100px;
+  padding-right: 40px;  /* chừa thêm khoảng cho nút X */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Nút X */
+.clear-input {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 50%;
+  background: #eee;
+  color: #666;
+  cursor: pointer;
+  display: none;  /* mặc định ẩn */
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.clear-input:hover {
+  background: #ff4d4d;
+  color: #fff;
+}

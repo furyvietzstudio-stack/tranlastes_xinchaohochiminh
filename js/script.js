@@ -9,31 +9,34 @@ const resultBox = document.getElementById("resultBox");
 const translatedText = document.getElementById("translatedText");
 const copyBtn = document.getElementById("copyBtn");
 const targetLabel = document.getElementById("targetLabel");
+const clearInput = document.getElementById("clearInput"); // nút X mới
 
 const placeholders = {
   vi: "Nhập văn bản cần dịch...",
   ko: "번역할 텍스트를 입력하세요..."
 };
 
-// Đếm ký tự trong ô nhập
+// Đếm ký tự + hiện nút X khi có chữ
 inputText.addEventListener("input", () => {
   count.textContent = inputText.value.length;
+  clearInput.style.display = inputText.value.length > 0 ? "block" : "none";
 });
 
-// Cập nhật giao diện theo ngôn ngữ chọn
+// Bấm nút X để xóa ô nhập
+clearInput.addEventListener("click", () => {
+  inputText.value = "";
+  count.textContent = "0";
+  clearInput.style.display = "none";
+});
+
+// Cập nhật giao diện theo ngôn ngữ
 function updateUI() {
   langLabel.textContent = langFrom.options[langFrom.selectedIndex].text;
   inputText.placeholder = placeholders[langFrom.value] || "Nhập văn bản...";
   targetLabel.textContent = langTo.options[langTo.selectedIndex].text;
 
-  // 🔥 nút dịch hiển thị theo ngôn ngữ gốc (langFrom)
-  if (langFrom.value === "vi") {
-    sendBtn.textContent = "Dịch";
-  } else if (langFrom.value === "ko") {
-    sendBtn.textContent = "번역";
-  }
+  sendBtn.textContent = langFrom.value === "ko" ? "번역" : "Dịch";
 }
-
 
 langFrom.addEventListener("change", updateUI);
 langTo.addEventListener("change", updateUI);
@@ -56,7 +59,7 @@ sendBtn.addEventListener("click", async () => {
 
   const payload = {
     text,
-    sourceLang: langFrom.value, // vi hoặc ko
+    sourceLang: langFrom.value,
     targetLang: langTo.value
   };
 
@@ -81,15 +84,11 @@ sendBtn.addEventListener("click", async () => {
     resultBox.style.display = "block";
   } catch (err) {
     console.error("Client Error:", err);
-    translatedText.value = "⚠️ Connet server!";
+    translatedText.value = "⚠️ Connect server!";
     resultBox.style.display = "block";
   } finally {
     sendBtn.disabled = false;
-  if (langFrom.value === "vi") {
-    sendBtn.textContent = "Dịch";
-      } else if (langFrom.value === "ko") {
-        sendBtn.textContent = "번역";
-      }
+    sendBtn.textContent = langFrom.value === "ko" ? "번역" : "Dịch";
   }
 });
 
@@ -99,7 +98,6 @@ copyBtn.addEventListener("click", () => {
   document.execCommand("copy");
   alert("✅ Đã copy kết quả vào clipboard!");
 });
-
 
 // Khởi tạo giao diện ban đầu
 updateUI();
